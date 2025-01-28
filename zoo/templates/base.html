@@ -5,5 +5,24 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     </head>
 
+<body>
+
+<nav>
+    <ul>
+        <h4 class="navbar-brand">Nav links:</h4>
+        <div class="text-center">
+    <li> <a href="{% url 'Homepage' %}"class="nav-link">Home</a></i>
+        <li> <a href="{% url 'About' %}"class="nav-link">About Us</a></i>
+            <li> <a href="{% url 'Animals' %}"class="nav-link">Animals</a></i>
+                <li> <a href="{% url 'Visit' %}"class="nav-link">Visits</a></i>
+                    <li> <a href="{% url 'Conservation' %}"class="nav-link">Conservation</a></i>
+                        <li> <a href="{% url 'Events' %}"class="nav-link">Events</a></i>
+        </ul>
+        <div>
+        </nav>
 {% block content %}
 {% endblock %}
+
+</body>
+
+</html>

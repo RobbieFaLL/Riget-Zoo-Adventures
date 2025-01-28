@@ -1,10 +1,49 @@
 {% extends 'base.html' %}
-{%load static %}
-
+{% load static %}
 
 {% block content %}
-<title>home</title>
+<title>Home | Riget Zoo Adventures</title>
 
-<h1>fun</h1>
-<p>suuivgzyu</p>
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-center mb-6">Welcome to Riget Zoo Adventures!</h1>
+
+    <p class="text-lg mb-4 text-center">
+        Discover a world of wonder, excitement, and wildlife at Riget Zoo Adventures. With hundreds of incredible species to see and interact with, there's something for everyone to enjoy.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-3">Plan Your Visit</h2>
+            <p class="text-lg mb-4">
+                Explore our beautiful zoo, discover exciting exhibits, and make memories with family and friends. Check out our visitor information to start planning your adventure today!
+            </p>
+            <a href="/visit" class="text-blue-500 hover:underline">Learn more</a>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-3">Our Animals</h2>
+            <p class="text-lg mb-4">
+                From majestic big cats to playful primates, meet the amazing animals that call Riget Zoo Adventures home. Learn about their unique stories and habitats.
+            </p>
+            <a href="/animals" class="text-blue-500 hover:underline">Meet our animals</a>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-3">Events & Experiences</h2>
+            <p class="text-lg mb-4">
+                Don't miss out on our special events, behind-the-scenes tours, and interactive experiences that bring you closer to wildlife than ever before.
+            </p>
+            <a href="/events" class="text-blue-500 hover:underline">View upcoming events</a>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-3">Support Conservation</h2>
+            <p class="text-lg mb-4">
+                Join us in protecting endangered species and their habitats. Find out how you can contribute to our vital conservation efforts.
+            </p>
+            <a href="/conservation" class="text-blue-500 hover:underline">Get involved</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
