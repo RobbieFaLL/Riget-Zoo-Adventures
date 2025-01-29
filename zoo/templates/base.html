@@ -2,27 +2,90 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        
     </head>
 
 <body>
+        <header>
 
-<nav>
-    <ul>
-        <h4 class="navbar-brand">Nav links:</h4>
-        <div class="text-center">
-    <li> <a href="{% url 'Homepage' %}"class="nav-link">Home</a></i>
-        <li> <a href="{% url 'About' %}"class="nav-link">About Us</a></i>
-            <li> <a href="{% url 'Animals' %}"class="nav-link">Animals</a></i>
-                <li> <a href="{% url 'Visit' %}"class="nav-link">Visits</a></i>
-                    <li> <a href="{% url 'Conservation' %}"class="nav-link">Conservation</a></i>
-                        <li> <a href="{% url 'Events' %}"class="nav-link">Events</a></i>
-        </ul>
-        <div>
-        </nav>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'Homepage' %}"><h1>Home</h1></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'About' %}">About us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Animals' %}">Animals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Visit' %}">Visits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Conservation' %}">Conservation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Events' %}">Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Booking' %}">Booking</a>
+                            </li>
+            
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+     
+            
+        </header>
 {% block content %}
 {% endblock %}
 
 </body>
+<script>
+    // Handle logout with POST method using JavaScript
+    document.getElementById('logout-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        const logoutForm = document.createElement('form');
+        logoutForm.method = 'POST';
+        logoutForm.action = "{% url 'logout' %}";
 
+        // Create a CSRF token input element
+        const csrfTokenInput = document.createElement('input');
+        csrfTokenInput.type = 'hidden';
+        csrfTokenInput.name = 'csrfmiddlewaretoken';
+        csrfTokenInput.value = '{{ csrf_token }}';
+        
+        logoutForm.appendChild(csrfTokenInput);
+        document.body.appendChild(logoutForm);
+        
+        logoutForm.submit();
+    });
+
+    document.getElementById("hamburger-menu").addEventListener("click", function() {
+        var menu = document.getElementById("navbar-links");
+        menu.classList.toggle("active");
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </html>
