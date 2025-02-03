@@ -22,6 +22,47 @@
     <p class="text-lg mb-4">
         Visit our zoo and learn about the habitats, behaviours, and conservation efforts for each of these amazing creatures. Every visit helps us continue to provide exceptional care for our animals.
     </p>
+
+    <!-- Example images of animals -->
+    <div class="animal-gallery mt-6">
+        <h3 class="text-xl font-semibold mb-4">Explore Our Animal Gallery</h3>
+        
+        <!-- Big Cat Section -->
+        <div class="animal-item mb-8">
+            <h4 class="text-lg font-medium mb-2">Big Cats</h4>
+            <img src="{% static 'images/big_cat.jpg' %}" alt="Lion in Riget Zoo" class="w-full h-auto rounded-lg shadow-md mb-4">
+            <p class="text-md">
+                Our big cat exhibit showcases the majestic lions, tigers, and leopards that call Riget Zoo home. These powerful predators are an integral part of the animal kingdom. Each species has unique behaviours, from the territorial pride of lions to the solitary nature of tigers. The conservation of big cats is crucial, as many species are endangered due to habitat loss and poaching.
+            </p>
+        </div>
+
+        <!-- Primate Section -->
+        <div class="animal-item mb-8">
+            <h4 class="text-lg font-medium mb-2">Primates</h4>
+            <img src="{% static 'images/primate.jpg' %}" alt="Chimpanzee in Riget Zoo" class="w-full h-auto rounded-lg shadow-md mb-4">
+            <p class="text-md">
+                Our primate family includes playful chimpanzees, curious lemurs, and intelligent orangutans. These incredible creatures share many similarities with humans, making them both fascinating and relatable. Primates are social animals, living in tight-knit groups. Their intelligence is astounding, and many can use tools, solve problems, and communicate with one another in complex ways.
+            </p>
+        </div>
+
+        <!-- Reptile Section -->
+        <div class="animal-item mb-8">
+            <h4 class="text-lg font-medium mb-2">Reptiles</h4>
+            <img src="{% static 'images/reptile.jpg' %}" alt="Snake in Riget Zoo" class="w-full h-auto rounded-lg shadow-md mb-4">
+            <p class="text-md">
+                Our reptile house is home to a variety of fascinating creatures including snakes, lizards, and crocodiles. These cold-blooded animals have adapted to diverse environments, from desert landscapes to rainforests. Some, like the chameleons, are known for their ability to change colour, while others, like the crocodiles, are ancient survivors with a history dating back millions of years.
+            </p>
+        </div>
+
+        <!-- Bird Section -->
+        <div class="animal-item mb-8">
+            <h4 class="text-lg font-medium mb-2">Birds</h4>
+            <img src="{% static 'images/bird.jpg' %}" alt="Parrot in Riget Zoo" class="w-full h-auto rounded-lg shadow-md mb-4">
+            <p class="text-md">
+                The bird section of Riget Zoo is filled with stunning species like colourful parrots, elegant flamingos, and majestic eagles. Birds are known for their ability to fly, but some species, like penguins, have adapted to life on the ground or in water. Many birds are migratory, traveling thousands of miles each year, while others have become experts at navigating their local habitats.
+            </p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
