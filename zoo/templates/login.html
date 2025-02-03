@@ -1,17 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-{% load static %}
 <h2>Login</h2>
 
-{% if messages %}
-<div class="alert alert-warning">
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-</div>
-{% endif %}
-
+<!-- Show non-field errors only if they exist -->
 {% if form.non_field_errors %}
 <div class="alert alert-danger">
     {% for error in form.non_field_errors %}
@@ -26,13 +19,15 @@
     <div class="form-group">
         <label for="{{ form.username.id_for_label }}">Username or Email:</label>
         {{ form.username }}
-        <div class="error" id="username-error" style="color: red;"></div>
+        <!-- Initially hide the error div -->
+        <div class="error" id="username-error" style="color: red; display: none;"></div>
     </div>
 
     <div class="form-group">
         <label for="{{ form.password.id_for_label }}">Password:</label>
         {{ form.password }}
-        <div class="error" id="password-error" style="color: red;"></div>
+        <!-- Initially hide the error div -->
+        <div class="error" id="password-error" style="color: red; display: none;"></div>
     </div>
 
     <button type="submit">Login</button>
@@ -40,59 +35,6 @@
 
 <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('login-form');
-    
-        form.addEventListener('submit', function(event) {
-            let isValid = true;
-            let usernameOrEmail = document.getElementById('id_username').value;
-            let password = document.getElementById('id_password').value;
-    
-            // Reset previous error messages
-            document.getElementById('username-error').textContent = '';
-            document.getElementById('password-error').textContent = '';
-    
-            // Basic client-side validation for email or username
-            if (!usernameOrEmail || !/\S+@\S+\.\S+/.test(usernameOrEmail) && !/\w+/.test(usernameOrEmail)) {
-                document.getElementById('username-error').textContent = 'Please enter a valid email address or username.';
-                isValid = false;
-            }
-    
-            if (!password) {
-                document.getElementById('password-error').textContent = 'Password cannot be empty.';
-                isValid = false;
-            }
-    
-            // Only proceed with checking if email/username exists if the initial validation passes
-            if (isValid) {
-                event.preventDefault();  // Prevent form submission while checking
-
-                checkUserExists(usernameOrEmail, function(exists) {
-                    if (!exists) {
-                        document.getElementById('username-error').textContent = 'This email or username is not registered.';
-                    } else {
-                        // Proceed with form submission if the user exists
-                        form.submit();
-                    }
-                });
-            }
-        });
-    
-        function checkUserExists(usernameOrEmail, callback) {
-            const url = `/check_user_exists/?username_or_email=${encodeURIComponent(usernameOrEmail)}`;
-    
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    callback(data.exists); // Call the callback with the result
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    callback(false); // Assume no user exists if there's an error
-                });
-        }
-    });
-</script>
+<script src="{% static 'login.js' %}"></script>
 
 {% endblock %}

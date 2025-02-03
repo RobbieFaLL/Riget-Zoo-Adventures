@@ -74,11 +74,11 @@ navbar {
 }
 
 .navbar .dropdown-menu a {
-  color: black !important; /* Force black text color */
+  color: black !important;
 }
 
 .navbar .dropdown-menu a:hover {
-  color: black !important; /* Ensure hover also keeps the text black */
+  color: black !important;
 }
 
 /* Main Content */
@@ -99,7 +99,7 @@ navbar {
   border-radius: 10%;
 }
 
-/* Form Styles */
+/* Form Styles (Global Form Styling) */
 form {
   background-color: #2c3e50;
   padding: 20px;
@@ -145,7 +145,7 @@ form input[type="password"]:focus {
 }
 
 form button {
-  background-color: black; /* Coffee brown */
+  background-color: black;
   color: white;
   font-size: 1.2em;
   padding: 12px 20px;
@@ -156,7 +156,7 @@ form button {
 }
 
 form button:hover {
-  background-color: green; /* Golden accent */
+  background-color: green;
 }
 
 .errorlist {
@@ -170,9 +170,9 @@ img {
 /* Card Layout */
 .card-container {
   display: flex;
-  flex-direction: column;  /* Vertically arrange cards */
+  flex-direction: column;
   gap: 10px;
-  padding: 10px;  
+  padding: 10px;
 }
 
 .card, .service-card {
@@ -183,31 +183,31 @@ img {
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  margin: 10px 0;  /* Vertical margin between cards */
+  margin: 10px 0;
   text-decoration: none;
-  height: auto;  /* Adjust height based on content */
+  height: auto;
 }
 
-/* Hover Effect */
+/* Hover Effect for Cards */
 .card:hover, .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Heading and Paragraph Styling */
+/* Card Heading and Paragraph Styling */
 .card h3, .service-card h3,
 .card p, .service-card p {
-  color: black;  /* Black text for both heading and paragraph */
+  color: black;
   font-family: "Bebas Neue", serif;
   margin-top: 10px;
 }
 
 .card p, .service-card p {
   font-size: 1rem;
-  color: black;  /* Same black color for both heading and paragraph */
+  color: black;
 }
 
-/* Button Styles */
+/* Button Styles for Cards */
 .card a.btn, .service-card a.btn {
   color: white;
   background-color: #326dee;
@@ -232,7 +232,7 @@ img {
 @media (max-width: 768px) {
   .card, .service-card {
     width: 100%;
-    max-width: 600px;  /* Wider cards for smaller screens */
+    max-width: 600px;
   }
 }
 
@@ -277,7 +277,7 @@ footer img {
   border-width: 1px;
 }
 
-/* Responsive Design for Cards */
+/* More Responsive Design for Cards */
 @media (max-width: 1200px) {
   .card-container {
     padding: 0 10px;
@@ -287,16 +287,16 @@ footer img {
 @media (max-width: 768px) {
   .card, .service-card {
     width: 100%;
-    max-width: 600px;  /* Wider cards for smaller screens */
-    height: calc(100% - 50px); /* Reduce height by 50px */
+    max-width: 600px;
+    height: calc(100% - 50px);
   }
 }
 
 @media (max-width: 500px) {
   .card, .service-card {
-    max-width: 95%; /* Use full width for very small screens */
-    height: calc(100% - 100px); /* Reduce height by an additional 50px */
-    padding: 10px; /* Add more compact padding */
+    max-width: 95%;
+    height: calc(100% - 100px);
+    padding: 10px;
   }
 }
 
@@ -307,28 +307,28 @@ footer img {
 }
 
 /* Responsive Design for Specific Screen Sizes */
-@media (max-width: 430px) { /* iPhone Pro Max */
+@media (max-width: 430px) {
   .card, .service-card, .strava-embed-placeholder {
-    max-width: 95%; /* Use almost full width */
-    margin: 0 auto; /* Centre the element */
+    max-width: 95%;
+    margin: 0 auto;
   }
 }
 
-@media (max-width: 390px) { /* Standard iPhone 13/14 */
+@media (max-width: 390px) {
   .card, .service-card, .strava-embed-placeholder {
-    max-width: 90%; /* Slightly narrower */
-    margin: 0 auto; /* Centre the element */
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
 
-@media (max-width: 375px) { /* Older iPhones like SE */
+@media (max-width: 375px) {
   .card, .service-card, .strava-embed-placeholder {
-    max-width: 85%; /* Make even narrower for smaller screens */
-    padding: 10px; /* Reduce padding */
+    max-width: 85%;
+    padding: 10px;
   }
-
+  
   img {
-    max-width: 300px; /* Reduce image size further */
+    max-width: 300px;
   }
 }
 
@@ -341,7 +341,6 @@ footer img {
   font-size: 16px;
 }
 
-/* Specific styling for the 'warning' type of alert */
 .alert-warning {
   background-color: #fff3cd;
   color: #856404;
@@ -356,7 +355,6 @@ footer img {
   color: #856404;
 }
 
-/* Optional: You can add more customization, like hover effects */
 .alert-warning:hover {
   background-color: #ffe8a1;
 }
@@ -366,4 +364,222 @@ footer img {
   padding: 10px;
   margin-top: 5px;
   border-radius: 5px;
+}
+
+/* ============================================
+   Updated Booking Form Specific Styles
+   (Use a dedicated class on the booking form, e.g., class="booking-form")
+============================================ */
+
+/* Container for Booking Form */
+.booking-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 15px;
+}
+
+/* Booking Form Card */
+.booking-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  color: #333; /* Use a darker color for form text */
+}
+
+/* Booking Form Group */
+.booking-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Booking Form Labels */
+.booking-form .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Booking Form Inputs and Textareas */
+.booking-form .form-group input,
+.booking-form .form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Booking Form Focus State */
+.booking-form .form-group input:focus,
+.booking-form .form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Booking Form Button */
+.booking-form button {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.booking-form button:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+/* Alert Messages for Booking Form */
+.booking-form .alert {
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.booking-form .alert-info {
+  background-color: #e9f7fe;
+  border: 1px solid #b8e1f6;
+  color: #31708f;
+}
+
+.booking-form .alert-success {
+  background-color: #dff0d8;
+  border: 1px solid #c8e5bc;
+  color: #3c763d;
+}
+
+/* End of Full Updated CSS File */
+
+/* FullCalendar Container */
+#event-calendar {
+  max-width: 90%;
+  margin: 0 auto; /* Center the calendar */
+
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* FullCalendar Header */
+.fc-header-toolbar {
+  background-color: #2c3e50; /* Dark background for the header */
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.fc-header-toolbar .fc-button {
+  color: white;
+  background-color: #326dee; /* Blue background for buttons */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.fc-header-toolbar .fc-button:hover {
+  background-color: #4a7ef0; /* Lighter blue on hover */
+}
+
+/* FullCalendar Day Headers */
+.fc-col-header-cell {
+  background-color: #f1f1f1; /* Light grey for day header */
+  color: #2c3e50; /* Dark text for the day header */
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+/* FullCalendar Events */
+.fc-event {
+  background-color: #378006; /* Green color for events */
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+.fc-event:hover {
+  background-color: #2c6d02; /* Darker green when hovered */
+  cursor: pointer;
+}
+
+/* Business Hours */
+.fc-business-hour {
+  background-color: #ffecb3; /* Light yellow for business hours */
+  border-radius: 5px;
+}
+
+/* FullCalendar Days of the Month */
+.fc-day {
+  background-color: #fafafa; /* Light background for the days */
+  padding: 15px;
+  text-align: center;
+}
+
+.fc-day.fc-day-today {
+  background-color: #eaf7ff; /* Light blue for today's date */
+  border-radius: 5px;
+}
+
+.fc-day.fc-day-other-month {
+  background-color: #f1f1f1; /* Faint background for non-current month days */
+}
+
+/* FullCalendar Week and Day Views */
+.fc-dayGridMonth-view .fc-day-grid-container {
+  margin: 0 auto;
+}
+
+/* Adjusting Font Sizes */
+.fc-toolbar-title {
+  font-size: 1.5rem; /* Title size for the month view */
+}
+
+.fc-day-number {
+  font-size: 1rem; /* Smaller font for the day numbers */
+}
+
+/* Custom Event Tooltip */
+.fc-event-tooltip {
+  background-color: #333; /* Dark background for event tooltips */
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  #event-calendar {
+      max-width: 100%; /* Make the calendar fit on smaller screens */
+  }
+
+  .fc-header-toolbar .fc-button {
+      font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .fc-header-toolbar .fc-button {
+      padding: 8px 16px; /* Smaller button padding on mobile */
+  }
+
+  .fc-header-toolbar .fc-button {
+      font-size: 0.7rem; /* Smaller font for buttons on mobile */
+  }
+
+  .fc-day-number {
+      font-size: 0.9rem; /* Adjust day number size for small screens */
+  }
 }

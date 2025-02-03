@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Booking Successful!</h1>
+
+        <div class="alert alert-success">
+            <p>Your booking has been successfully confirmed. Thank you for choosing Riget Zoo Adventures! We look forward to seeing you soon.</p>
+        </div>
+
+        <h2 class="text-center mb-4">Booking Details</h2>
+
+        <div class="bg-light p-4 rounded">
+            <h4 class="font-weight-bold">Your Booking Information</h4>
+            <p><strong>Name:</strong> {{ booking.name }}</p>
+            <p><strong>Email:</strong> {{ booking.email }}</p>
+            <p><strong>Phone:</strong> {{ booking.phone }}</p>
+            <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+            <p><strong>Booking Time:</strong> {{ booking.booking_time }}</p>
+            <p><strong>Message:</strong> {{ booking.message }}</p>
+
+            <p class="mt-4"><strong>Special Note:</strong> You will receive an email confirmation with your booking details shortly. Please arrive 10 minutes before your scheduled time.</p>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'Booking' %}" class="btn btn-primary">Back to Booking</a>
+        </div>
+    </div>
+{% endblock %}
