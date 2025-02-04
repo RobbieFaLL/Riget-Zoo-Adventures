@@ -1,81 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Highlight today's date in the calendar
-    highlightToday();
+    const calendarDays = document.querySelectorAll(".clickable-day");
+    const detailsContainer = document.getElementById("day-details");
+    const dayTitle = document.getElementById("day-title");
+    const dayInfo = document.getElementById("day-info");
 
-    // Add event listeners for calendar navigation
-    const prevMonthBtn = document.getElementById("prev-month");
-    const nextMonthBtn = document.getElementById("next-month");
+    calendarDays.forEach(day => {
+        day.addEventListener("click", function () {
+            let date = this.getAttribute("data-date");
 
-    if (prevMonthBtn && nextMonthBtn) {
-        prevMonthBtn.addEventListener("click", function () {
-            navigateMonth(-1);
-        });
-        nextMonthBtn.addEventListener("click", function () {
-            navigateMonth(1);
-        });
-    }
+            if (date) {
+                fetch(`/get-day-details/?date=${date}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Set title and info
+                        dayTitle.innerText = `Opening Details for ${data.date}`;
 
-    // Booking form validation
-    const bookingForm = document.querySelector("form");
-    if (bookingForm) {
-        bookingForm.addEventListener("submit", function (event) {
-            if (!validateForm()) {
-                event.preventDefault();
+                        if (data.status === "open") {
+                            dayInfo.innerHTML = `<strong>Opening Hours:</strong> ${data.opening_time} - ${data.closing_time}`;
+                        } else if (data.status === "closed") {
+                            dayInfo.innerHTML = `<strong>Closed:</strong> ${data.reason}`;
+                        } else {
+                            dayInfo.innerHTML = `<strong>No data available for this day.</strong>`;
+                        }
+
+                        // Show the card
+                        detailsContainer.classList.add("show");
+                    })
+                    .catch(error => console.error("Error fetching day details:", error));
             }
         });
-    }
+    });
 });
-
-// Function to navigate calendar months
-function navigateMonth(offset) {
-    const currentMonth = parseInt(document.getElementById("calendar").dataset.month);
-    const currentYear = parseInt(document.getElementById("calendar").dataset.year);
-
-    let newMonth = currentMonth + offset;
-    let newYear = currentYear;
-
-    if (newMonth < 1) {
-        newMonth = 12;
-        newYear--;
-    } else if (newMonth > 12) {
-        newMonth = 1;
-        newYear++;
-    }
-
-    window.location.href = `/calendar/${newYear}/${newMonth}/`;
-}
-
-// Function to validate booking form
-function validateForm() {
-    let isValid = true;
-    let requiredFields = document.querySelectorAll("form input[required], form textarea[required]");
-
-    requiredFields.forEach((field) => {
-        if (!field.value.trim()) {
-            field.classList.add("error");
-            isValid = false;
-        } else {
-            field.classList.remove("error");
-        }
-    });
-
-    return isValid;
-}
-
-// Function to highlight today's date in the calendar
-function highlightToday() {
-    const today = new Date();
-    const todayDate = today.getDate();
-    const currentMonth = today.getMonth() + 1;
-    const currentYear = today.getFullYear();
-
-    document.querySelectorAll(".calendar td").forEach((cell) => {
-        if (
-            parseInt(cell.dataset.day) === todayDate &&
-            parseInt(cell.dataset.month) === currentMonth &&
-            parseInt(cell.dataset.year) === currentYear
-        ) {
-            cell.classList.add("today");
-        }
-    });
-}

@@ -178,12 +178,40 @@ form button:hover {
 }
 
 /* Colour Coding for Opening Hours (Smooth Backgrounds) */
-.day-green { background: linear-gradient(to bottom, #3CB371, #2E8B57); }  /* Standard */
-.day-orange { background: linear-gradient(to bottom, #FFA500, #FF8C00); } /* Short Day */
-.day-blue { background: linear-gradient(to bottom, #0073e6, #005bb5); }   /* Traditional */
-.day-purple { background: linear-gradient(to bottom, #8A2BE2, #6A0DAD); } /* Extended */
-.day-crimson { background: linear-gradient(to bottom, #DC143C, #B22222); } /* Late */
-.day-red { background: linear-gradient(to bottom, #FF0000, #B22222); } /* Closed */
+.day-green { 
+  background: linear-gradient(to bottom, #3CB371, #2E8B57);  /* Standard */
+  color: white; 
+}  
+
+.day-orange { 
+  background: linear-gradient(to bottom, #FFA500, #FF8C00); /* Short Day */
+  color: black; 
+} 
+
+.day-blue { 
+  background: linear-gradient(to bottom, #0073e6, #005bb5); /* Traditional */
+  color: white; 
+}   
+
+.day-purple { 
+  background: linear-gradient(to bottom, #8A2BE2, #6A0DAD); /* Extended */
+  color: white; 
+} 
+
+.day-crimson { 
+  background: linear-gradient(to bottom, #B22222, #8B0000); /* Late Hours */
+  color: white; 
+}  
+
+/* Closed Days (Transparent Background, Red Border) */
+.day-closed { 
+  background: transparent; 
+  border: 2px solid red;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
 
 /* Grayed-Out Cells for Previous/Next Month */
 .calendar td:not(.day-green):not(.day-orange):not(.day-blue):not(.day-purple):not(.day-crimson):not(.day-red) {
@@ -289,28 +317,70 @@ footer p {
   margin: 0;
 }
 
-/* Modal Styles */
+/* Modal Styling */
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
   background: white;
+  width: 400px;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  color: black;  /* Ensure text inside is black */
 }
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
+}
+
+.modal h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: black;
+}
+
+.modal p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: black;
+}
+
+.book-btn {
+  display: inline-block;
+  background: #0073e6;
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+.book-btn:hover {
+  background: #005bb5;
+}
+
+
 
 .close {
   float: right;
@@ -321,4 +391,71 @@ footer p {
 
 .close:hover {
   color: red;
+}
+
+/* Expandable Day Details Card */
+.day-details-card {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Expand effect */
+.clickable-day {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Expanding effect */
+.clickable-day.expanded {
+  transform: scale(1.5); /* Expands when clicked */
+  z-index: 10;
+}
+
+/* Ensure other elements do not shift */
+.clickable-day.expanded .day-details-card {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover effect */
+.clickable-day:hover {
+  transform: scale(1.05);
+}
+
+/* Calendar Colors */
+.day-green { background-color: #378006; }
+.day-orange { background-color: #FFA500; }
+.day-blue { background-color: #0073e6; }
+.day-purple { background-color: #8A2BE2; }
+.day-crimson { background-color: #DC143C; }
+.day-red { background-color: #FF0000; }
+
+/* Ensure smooth closing */
+.day-details-card.show {
+  opacity: 1;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: scale(0.95);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
 }

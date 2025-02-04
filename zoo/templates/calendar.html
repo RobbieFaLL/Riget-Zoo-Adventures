@@ -12,18 +12,19 @@
         <a href="{% url 'calendar_month' year=next_year month=next_month %}" class="btn btn-secondary">Next &raquo;</a>
     </div>    
 
-    <!-- Opening Hours Key -->
-    <div id="calendar-key">
-        <h3>Opening Hours Key</h3>
-        <ul class="list-unstyled">
-            <li><span class="color-box" style="background: #378006;"></span> 10:00 - 18:00 (Standard)</li>
-            <li><span class="color-box" style="background: #FFA500;"></span> 10:00 - 17:00 (Short Day)</li>
-            <li><span class="color-box" style="background: #0073e6;"></span> 09:00 - 17:00 (Traditional)</li>
-            <li><span class="color-box" style="background: #8A2BE2;"></span> 09:00 - 18:00 (Extended)</li>
-            <li><span class="color-box" style="background: #DC143C;"></span> 09:00 - 21:00 (Late)</li>
-            <li><span class="color-box" style="background: #FF0000;"></span> Closed</li>
-        </ul>
-    </div>
+<!-- Opening Hours Key -->
+<div id="calendar-key">
+    <h3>Opening Hours Key</h3>
+    <ul class="list-unstyled">
+        <li><span class="color-box" style="background: #378006;"></span> <strong>10:00 - 18:00</strong> (Standard)</li>
+        <li><span class="color-box" style="background: #FFA500;"></span> <strong>10:00 - 17:00</strong> (Short Day)</li>
+        <li><span class="color-box" style="background: #0073e6;"></span> <strong>09:00 - 17:00</strong> (Traditional)</li>
+        <li><span class="color-box" style="background: #8A2BE2;"></span> <strong>09:00 - 18:00</strong> (Extended)</li>
+        <li><span class="color-box" style="background: #B22222;"></span> <strong>09:00 - 21:00</strong> (Late)</li>
+        <li><span class="color-box" style="border: 2px solid red; background: transparent;"></span> <strong>Closed</strong></li>
+    </ul>
+</div>
+
 
     <!-- Calendar Grid -->
     <div class="calendar-container">
@@ -43,7 +44,7 @@
                 {% for week in calendar_data %}
                 <tr>
                     {% for day in week %}
-                    <td class="{% if day.color %}day-{{ day.color }}{% endif %}" 
+                    <td class="clickable-day {% if day.color %}day-{{ day.color }}{% endif %}" 
                         data-date="{{ day.date|date:'Y-m-d' }}">
                         <span class="date-number">{{ day.date|date:"j" }}</span>
                     </td>
@@ -52,6 +53,15 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Floating Modal -->
+<div id="day-modal" class="modal">
+    <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div id="modal-content"></div>
     </div>
 </div>
 
