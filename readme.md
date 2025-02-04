@@ -1,90 +1,67 @@
+Here's your `README.md` in proper Markdown format:  
+
+```md
 # Riget Zoo Adventures
 
 ## Overview
-Riget Zoo Adventures is a Django-based web application that provides information about the zoo, allows users to book visits, and view events. The project includes authentication, a calendar for opening times, and various informational pages.
+Riget Zoo Adventures is a Django-based web application designed to provide visitors with information about the zoo, including events, animals, conservation efforts, and an online booking system.
 
-## Features
-- **User Authentication:** Signup, login, and logout functionalities.
-- **Booking System:** Allows users to book visits online.
-- **Events Calendar:** Displays zoo events and opening times.
-- **Informational Pages:** About, animals, conservation, and visiting details.
-- **Interactive UI:** Built with Django templates, Bootstrap, and JavaScript.
+## Directory Structure
+```
+Riget Zoo Adventures/
+│── zoo/                   # Main Django application directory
+│── .gitignore             # Git ignore file
+│── readme.md              # Project documentation
+│── Task1_Test_Strategy_Template.doc  # Test strategy document
+│── Task2_Test_Log_Template.doc       # Test log document
+│── W76777-T-Level-Documents/         # Additional documentation files
+```
+
+### Key Components
+- **`zoo/`** - The main Django project directory containing all applications and configurations.
+- **`.gitignore`** - Specifies files and directories to be ignored by Git.
+- **`readme.md`** - Project documentation file.
+- **Testing Documents** - Includes strategy and logging templates for software testing.
 
 ## Installation
-### Prerequisites
-Ensure you have Python and Django installed.
-```bash
-pip install -r requirements.txt
-```
-
-### Running the Project
-```bash
-python manage.py runserver
-```
-Access the site at `http://127.0.0.1:8000/`
-
-## Project Structure
-
-| Directory / File            | Description |
-|----------------------------|-------------|
-| `zoo/`                     | Project root directory |
-| ├── `env/`                 | Virtual environment (not included in repo) |
-| ├── `management/`          | Django management commands (if any) |
-| ├── `pages/`               | Main Django app containing views and models |
-| │   ├── `migrations/`       | Django migrations for database changes |
-| │   ├── `__init__.py`      | Marks the directory as a package |
-| │   ├── `admin.py`         | Django admin configuration |
-| │   ├── `apps.py`          | App configuration |
-| │   ├── `models.py`        | Database models |
-| │   ├── `tests.py`         | Unit tests |
-| │   ├── `urls.py`          | URL routing |
-| │   ├── `views.py`         | Application logic and views |
-| ├── `templates/`           | HTML templates for the site |
-| │   ├── `about.html`       | About page |
-| │   ├── `animals.html`     | Animal information page |
-| │   ├── `base.html`        | Base template for page structure |
-| │   ├── `Booking_Success.html` | Booking confirmation page |
-| │   ├── `booking.html`     | Booking form page |
-| │   ├── `calendar.html`    | Calendar view for opening times |
-| │   ├── `conservation.html`| Conservation efforts page |
-| │   ├── `events.html`      | Zoo events page |
-| │   ├── `index.html`       | Homepage |
-| │   ├── `login.html`       | User login page |
-| │   ├── `logout.html`      | User logout confirmation |
-| │   ├── `signup.html`      | Signup page |
-| │   ├── `visit.html`       | Visiting information |
-| ├── `devstatic/`           | Static files directory |
-| │   ├── `images/`          | Contains images for the site |
-| │   ├── `booking.js`       | JavaScript for booking functionality |
-| │   ├── `cal.js`           | JavaScript for calendar functionality |
-| │   ├── `login.js`         | JavaScript for login interactions |
-| │   ├── `styles.css`       | Main stylesheet for the site |
-| ├── `zoo/`                 | Django project settings directory |
-| │   ├── `__init__.py`      | Marks directory as a package |
-| │   ├── `asgi.py`          | ASGI application config |
-| │   ├── `settings.py`      | Django settings |
-| │   ├── `urls.py`          | Project URL routing |
-| │   ├── `wsgi.py`          | WSGI application config |
-| ├── `db.sqlite3`           | SQLite database file |
-| ├── `manage.py`            | Django management script |
-| ├── `requirements.txt`     | List of dependencies |
-| ├── `.gitignore`           | Files and directories to ignore in Git |
+1. **Clone the repository**  
+   ```sh
+   git clone https://github.com/yourusername/riget-zoo-adventures.git
+   ```
+2. **Navigate into the project directory**  
+   ```sh
+   cd riget-zoo-adventures
+   ```
+3. **Create and activate a virtual environment**  
+   ```sh
+   python -m venv env
+   source env/bin/activate  # On Windows use `env\Scripts\activate`
+   ```
+4. **Install dependencies**  
+   ```sh
+   pip install -r zoo/requirements.txt
+   ```
+5. **Run database migrations**  
+   ```sh
+   python zoo/manage.py migrate
+   ```
+6. **Start the development server**  
+   ```sh
+   python zoo/manage.py runserver
+   ```
 
 ## Usage
-- Navigate to the homepage and explore the available pages.
-- Sign up or log in to make a booking.
-- View the events calendar to see upcoming zoo events and opening hours.
+- Visit **[`http://127.0.0.1:8000/`](http://127.0.0.1:8000/)** in a web browser to explore the site.
+- Access the Django admin panel at **`/admin/`** (requires superuser credentials).
+- Use the booking system to reserve tickets online.
 
-## Contributing
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a Pull Request.
+## Contribution
+- Fork the repository and create a new branch for changes.
+- Submit pull requests for review.
+- Ensure all contributions follow Django best practices.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+```
 
----
-For any inquiries, contact [Your Email or Project Contact Info].
-
+Would you like to add any additional sections? 🚀
