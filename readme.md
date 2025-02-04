@@ -1,29 +1,32 @@
-Here's your `README.md` in proper Markdown format:  
-
-```md
 # Riget Zoo Adventures
 
 ## Overview
-Riget Zoo Adventures is a Django-based web application designed to provide visitors with information about the zoo, including events, animals, conservation efforts, and an online booking system.
+**Riget Zoo Adventures** is a Django-based web application that provides visitors with essential zoo information, including:
+- Animal exhibits
+- Upcoming events
+- Conservation efforts
+- Online booking system for visits and activities
 
 ## Directory Structure
 ```
 Riget Zoo Adventures/
-│── zoo/                   # Main Django application directory
-│── .gitignore             # Git ignore file
-│── readme.md              # Project documentation
+│── zoo/                     # Main Django application directory
+│── .gitignore               # Git ignore file
+│── readme.md                # Project documentation
 │── Task1_Test_Strategy_Template.doc  # Test strategy document
 │── Task2_Test_Log_Template.doc       # Test log document
 │── W76777-T-Level-Documents/         # Additional documentation files
 ```
 
 ### Key Components
-- **`zoo/`** - The main Django project directory containing all applications and configurations.
+- **`zoo/`** - Contains Django applications and configurations.
 - **`.gitignore`** - Specifies files and directories to be ignored by Git.
-- **`readme.md`** - Project documentation file.
-- **Testing Documents** - Includes strategy and logging templates for software testing.
+- **`readme.md`** - Project documentation.
+- **Testing Documents** - Includes testing strategy and logging templates.
 
 ## Installation
+Follow these steps to set up the project:
+
 1. **Clone the repository**  
    ```sh
    git clone https://github.com/yourusername/riget-zoo-adventures.git
@@ -41,7 +44,7 @@ Riget Zoo Adventures/
    ```sh
    pip install -r zoo/requirements.txt
    ```
-5. **Run database migrations**  
+5. **Apply database migrations**  
    ```sh
    python zoo/manage.py migrate
    ```
@@ -51,17 +54,5 @@ Riget Zoo Adventures/
    ```
 
 ## Usage
-- Visit **[`http://127.0.0.1:8000/`](http://127.0.0.1:8000/)** in a web browser to explore the site.
-- Access the Django admin panel at **`/admin/`** (requires superuser credentials).
-- Use the booking system to reserve tickets online.
+- Open **[`http://127.0.0.1:8000/`](http://127.
 
-## Contribution
-- Fork the repository and create a new branch for changes.
-- Submit pull requests for review.
-- Ensure all contributions follow Django best practices.
-
-## License
-This project is licensed under the **MIT License**.
-```
-
-Would you like to add any additional sections? 🚀
