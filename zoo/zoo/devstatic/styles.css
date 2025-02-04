@@ -459,3 +459,6 @@ footer p {
       transform: scale(1);
   }
 }
+.bg-light.p-4.rounded {
+  color: black !important;
+}
