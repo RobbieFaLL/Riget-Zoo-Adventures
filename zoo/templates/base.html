@@ -36,7 +36,10 @@
                                 <a class="nav-link" href="{% url 'Events' %}">Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'Booking' %}">Booking</a>
+                                <a class="nav-link" href="{% url 'booking' %}">Booking</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'calendar' %}">opening times</a>
                             </li>
             
                             {% if user.is_authenticated %}
@@ -58,6 +61,10 @@
      
             
         </header>
+        <br>
+        <br>
+        <br>
+        <br>
 {% block content %}
 {% endblock %}
 

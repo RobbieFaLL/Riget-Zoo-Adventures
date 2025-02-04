@@ -21,13 +21,13 @@ body {
   padding: 5px;
   min-height: 100vh;
   font-family: "Lemon", serif;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Headings */
 h1 {
   margin-bottom: 30px;
   font-size: 2.5rem;
+  text-align: center;
 }
 
 h2,
@@ -49,7 +49,7 @@ a:hover {
 }
 
 /* Navbar */
-navbar {
+.navbar {
   background-color: #333;
   position: fixed;
   top: 0;
@@ -73,33 +73,13 @@ navbar {
   color: black;
 }
 
-.navbar .dropdown-menu a {
-  color: black !important;
-}
-
-.navbar .dropdown-menu a:hover {
-  color: black !important;
-}
-
 /* Main Content */
 .main {
   max-width: 960px;
   margin: 0 auto;
 }
 
-.text-center {
-  margin-top: 60px;
-  text-align: center;
-}
-
-.container {
-  justify-content: center;
-  box-sizing: content-box;
-  border: 2px #2c3e50;
-  border-radius: 10%;
-}
-
-/* Form Styles (Global Form Styling) */
+/* Form Styles */
 form {
   background-color: #2c3e50;
   padding: 20px;
@@ -109,39 +89,19 @@ form {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-form h1 {
-  font-size: 2em;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 form label {
-  background-color: #2c3e50;
   font-size: 1.1em;
   display: block;
   margin-bottom: 8px;
 }
 
-form select,
-form input[type="checkbox"],
-form input[type="text"],
-form input[type="email"],
-form input[type="password"] {
-  width: 95%;
+form input, form textarea {
+  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   font-size: 1em;
   border-radius: 5px;
   border: 1px solid #2c3e50;
-}
-
-form select:focus,
-form input[type="checkbox"]:focus,
-form input[type="text"]:focus,
-form input[type="email"]:focus,
-form input[type="password"]:focus {
-  border-color: #2c3e50;
-  outline: none;
 }
 
 form button {
@@ -150,7 +110,6 @@ form button {
   font-size: 1.2em;
   padding: 12px 20px;
   border-radius: 5px;
-  border: none;
   width: 100%;
   transition: background-color 0.3s;
 }
@@ -159,84 +118,163 @@ form button:hover {
   background-color: green;
 }
 
-.errorlist {
-  color: red;
+/* Calendar Container */
+.calendar-container {
+  max-width: 850px;
+  margin: 20px auto;
+  text-align: center;
+  background: #34495e;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-img {
-  max-width: 100%;
+/* Calendar Table */
+.calendar {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 5px;
 }
 
-/* Card Layout */
-.card-container {
+/* Table Headers (Days of the Week) */
+.calendar th {
+  background: #2c3e50;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+/* Table Cells */
+.calendar td {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hover Effect */
+.calendar td:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Date Numbers */
+.date-number {
+  font-weight: bold;
+  display: block;
+  font-size: 1.3rem;
+}
+
+/* Colour Coding for Opening Hours (Smooth Backgrounds) */
+.day-green { background: linear-gradient(to bottom, #3CB371, #2E8B57); }  /* Standard */
+.day-orange { background: linear-gradient(to bottom, #FFA500, #FF8C00); } /* Short Day */
+.day-blue { background: linear-gradient(to bottom, #0073e6, #005bb5); }   /* Traditional */
+.day-purple { background: linear-gradient(to bottom, #8A2BE2, #6A0DAD); } /* Extended */
+.day-crimson { background: linear-gradient(to bottom, #DC143C, #B22222); } /* Late */
+.day-red { background: linear-gradient(to bottom, #FF0000, #B22222); } /* Closed */
+
+/* Grayed-Out Cells for Previous/Next Month */
+.calendar td:not(.day-green):not(.day-orange):not(.day-blue):not(.day-purple):not(.day-crimson):not(.day-red) {
+  background: #555; 
+  color: #bbb;
+  opacity: 0.6;
+}
+
+/* Calendar Navigation */
+.calendar-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-navigation a {
+  background: #3498db;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.calendar-navigation a:hover {
+  background: #2980b9;
+}
+
+/* Opening Hours Key */
+#calendar-key {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
+  align-items: center;
 }
 
-.card, .service-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+#calendar-key h3 {
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+#calendar-key ul {
+  list-style: none;
+  padding: 0;
   width: 100%;
-  margin: 10px 0;
-  text-decoration: none;
-  height: auto;
+  text-align: left;
 }
 
-/* Hover Effect for Cards */
-.card:hover, .service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Card Heading and Paragraph Styling */
-.card h3, .service-card h3,
-.card p, .service-card p {
-  color: black;
-  font-family: "Bebas Neue", serif;
-  margin-top: 10px;
-}
-
-.card p, .service-card p {
+#calendar-key li {
   font-size: 1rem;
-  color: black;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
 }
 
-/* Button Styles for Cards */
-.card a.btn, .service-card a.btn {
-  color: white;
-  background-color: #326dee;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 20px;
+.color-box {
   display: inline-block;
-  margin-top: 10px;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
-.card a.btn:hover, .service-card a.btn:hover {
-  background-color: #4a7ef0;
-}
-
-/* Responsive Design for Cards */
-@media (max-width: 1200px) {
-  .card-container {
-    padding: 0 10px;
-  }
-}
-
+/* Mobile Adjustments */
 @media (max-width: 768px) {
-  .card, .service-card {
-    width: 100%;
-    max-width: 600px;
+  .calendar th, .calendar td {
+    font-size: 14px;
+    height: 60px;
+    width: 60px;
+    padding: 5px;
+  }
+
+  .calendar td:hover {
+    transform: none;
+  }
+
+  #calendar-key {
+    max-width: 100%;
   }
 }
 
-/* Footer Styling */
+
+/* Footer */
 footer {
   text-align: center;
   background-color: #333;
@@ -251,335 +289,36 @@ footer p {
   margin: 0;
 }
 
-footer img {
-  display: block;
-  margin: 5px auto 0;
-  height: 50px;
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
 }
 
-.notification {
-  color: #1ac888;
-  border-color: #1ac888;
-  border-style: solid;
-  margin: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 20px;
-  border-width: 1px;
-}
-
-.error {
-  color: #d32752;
-  border-color: #d32752;
-  border-style: solid;
-  margin: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 20px;
-  border-width: 1px;
-}
-
-/* More Responsive Design for Cards */
-@media (max-width: 1200px) {
-  .card-container {
-    padding: 0 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .card, .service-card {
-    width: 100%;
-    max-width: 600px;
-    height: calc(100% - 50px);
-  }
-}
-
-@media (max-width: 500px) {
-  .card, .service-card {
-    max-width: 95%;
-    height: calc(100% - 100px);
-    padding: 10px;
-  }
-}
-
-@media (max-width: 500px) {
-  img {
-    max-width: 80%;
-  }
-}
-
-/* Responsive Design for Specific Screen Sizes */
-@media (max-width: 430px) {
-  .card, .service-card, .strava-embed-placeholder {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 390px) {
-  .card, .service-card, .strava-embed-placeholder {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 375px) {
-  .card, .service-card, .strava-embed-placeholder {
-    max-width: 85%;
-    padding: 10px;
-  }
-  
-  img {
-    max-width: 300px;
-  }
-}
-
-/* Custom styling for alert messages */
-.alert {
+.modal-content {
+  background: white;
   padding: 20px;
-  margin-bottom: 15px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.alert-warning {
-  background-color: #fff3cd;
-  color: #856404;
-  border-color: #ffeeba;
-}
-
-.alert-warning a {
-  color: #856404;
-}
-
-.alert-warning .close {
-  color: #856404;
-}
-
-.alert-warning:hover {
-  background-color: #ffe8a1;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-}
-
-/* ============================================
-   Updated Booking Form Specific Styles
-   (Use a dedicated class on the booking form, e.g., class="booking-form")
-============================================ */
-
-/* Container for Booking Form */
-.booking-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 0 15px;
-}
-
-/* Booking Form Card */
-.booking-form {
-  background-color: #ffffff;
-  padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  color: #333; /* Use a darker color for form text */
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Booking Form Group */
-.booking-form .form-group {
-  margin-bottom: 1.5rem;
-}
-
-/* Booking Form Labels */
-.booking-form .form-group label {
-  display: block;
+.close {
+  float: right;
+  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-/* Booking Form Inputs and Textareas */
-.booking-form .form-group input,
-.booking-form .form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fafafa;
-  transition: border-color 0.3s ease;
-  box-sizing: border-box;
-}
-
-/* Booking Form Focus State */
-.booking-form .form-group input:focus,
-.booking-form .form-group textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Booking Form Button */
-.booking-form button {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
-  font-size: 1.1rem;
-  padding: 0.75rem;
-  border-radius: 5px;
-  border: none;
-  width: 100%;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
-.booking-form button:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
-/* Alert Messages for Booking Form */
-.booking-form .alert {
-  padding: 1rem;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.booking-form .alert-info {
-  background-color: #e9f7fe;
-  border: 1px solid #b8e1f6;
-  color: #31708f;
-}
-
-.booking-form .alert-success {
-  background-color: #dff0d8;
-  border: 1px solid #c8e5bc;
-  color: #3c763d;
-}
-
-/* End of Full Updated CSS File */
-
-/* FullCalendar Container */
-#event-calendar {
-  max-width: 90%;
-  margin: 0 auto; /* Center the calendar */
-
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* FullCalendar Header */
-.fc-header-toolbar {
-  background-color: #2c3e50; /* Dark background for the header */
-  color: white;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.fc-header-toolbar .fc-button {
-  color: white;
-  background-color: #326dee; /* Blue background for buttons */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-.fc-header-toolbar .fc-button:hover {
-  background-color: #4a7ef0; /* Lighter blue on hover */
-}
-
-/* FullCalendar Day Headers */
-.fc-col-header-cell {
-  background-color: #f1f1f1; /* Light grey for day header */
-  color: #2c3e50; /* Dark text for the day header */
-  font-weight: bold;
-  text-align: center;
-  padding: 10px;
-}
-
-/* FullCalendar Events */
-.fc-event {
-  background-color: #378006; /* Green color for events */
-  color: white;
-  border-radius: 5px;
-  padding: 5px;
-  text-align: center;
-}
-
-.fc-event:hover {
-  background-color: #2c6d02; /* Darker green when hovered */
-  cursor: pointer;
-}
-
-/* Business Hours */
-.fc-business-hour {
-  background-color: #ffecb3; /* Light yellow for business hours */
-  border-radius: 5px;
-}
-
-/* FullCalendar Days of the Month */
-.fc-day {
-  background-color: #fafafa; /* Light background for the days */
-  padding: 15px;
-  text-align: center;
-}
-
-.fc-day.fc-day-today {
-  background-color: #eaf7ff; /* Light blue for today's date */
-  border-radius: 5px;
-}
-
-.fc-day.fc-day-other-month {
-  background-color: #f1f1f1; /* Faint background for non-current month days */
-}
-
-/* FullCalendar Week and Day Views */
-.fc-dayGridMonth-view .fc-day-grid-container {
-  margin: 0 auto;
-}
-
-/* Adjusting Font Sizes */
-.fc-toolbar-title {
-  font-size: 1.5rem; /* Title size for the month view */
-}
-
-.fc-day-number {
-  font-size: 1rem; /* Smaller font for the day numbers */
-}
-
-/* Custom Event Tooltip */
-.fc-event-tooltip {
-  background-color: #333; /* Dark background for event tooltips */
-  color: white;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 0.9rem;
-}
-
-/* Ensure responsiveness */
-@media (max-width: 768px) {
-  #event-calendar {
-      max-width: 100%; /* Make the calendar fit on smaller screens */
-  }
-
-  .fc-header-toolbar .fc-button {
-      font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .fc-header-toolbar .fc-button {
-      padding: 8px 16px; /* Smaller button padding on mobile */
-  }
-
-  .fc-header-toolbar .fc-button {
-      font-size: 0.7rem; /* Smaller font for buttons on mobile */
-  }
-
-  .fc-day-number {
-      font-size: 0.9rem; /* Adjust day number size for small screens */
-  }
+.close:hover {
+  color: red;
 }

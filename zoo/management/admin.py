@@ -1,53 +1,58 @@
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, ClosedDays, Event, OpeningHours, BookingModel
 
+
+# Custom User Admin
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    # Define what fields to display in the admin panel
     list_display = ('username', 'email', 'phone_number', 'is_staff', 'is_active')
     search_fields = ('username', 'email', 'phone_number')
+    ordering = ('username',)  # Ensure consistent ordering
 
-    # Use the fieldsets from the base UserAdmin for consistency
+    # Extend the default UserAdmin fieldsets to include custom fields
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('phone_number',)}),  # Add custom fields here
+        (None, {'fields': ('phone_number',)}),  
     )
 
-    # Use the add_fieldsets for the 'Add User' form
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('phone_number',)}),  # Add custom fields here
+        (None, {'fields': ('phone_number',)}),  
     )
 
-from .models import opening_hours_list, ClosedDays
-
-@admin.register(opening_hours_list)
+# Opening Hours Admin
+@admin.register(OpeningHours)
 class OpeningHoursAdmin(admin.ModelAdmin):
-    list_display = ('day_of_week', 'open_time', 'close_time')
-    search_fields = ('day_of_week',)
-    
+    list_display = ('date', 'opening_time', 'closing_time', 'get_color_display')
+    search_fields = ('date',)
+    ordering = ('date',)
+    list_filter = ('opening_time', 'closing_time')
+
+    def get_color_display(self, obj):
+        """Display the color associated with the opening hours"""
+        return obj.get_color()
+    get_color_display.short_description = "Opening Hours Color"
+
+# Closed Days Admin
 @admin.register(ClosedDays)
 class ClosedDaysAdmin(admin.ModelAdmin):
     list_display = ('date', 'reason')
     search_fields = ('date', 'reason')
-    
-from django.contrib import admin
-from .models import Bookingmodel
+    ordering = ('date',)
+    list_filter = ('date',)
 
-@admin.register(Bookingmodel)
+# Booking System Admin
+@admin.register(BookingModel)
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'booking_date', 'booking_time', 'message')
     search_fields = ('name', 'email', 'booking_date', 'booking_time')
     list_filter = ('booking_date',)
+    ordering = ('-booking_date', '-booking_time')
 
-from django.contrib import admin
-from .models import Event
-
+# Events Admin
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'start_time', 'end_time', 'description', 'location', 'created_at', 'updated_at')
-    list_filter = ('start_time', 'end_time')  # Filter events by date
-    search_fields = ('title', 'description')  # Enable searching by title and description
+    list_filter = ('start_time', 'end_time')  
+    search_fields = ('title', 'description')
+    ordering = ('-start_time',)
+    date_hierarchy = 'start_time'  # Enables quick navigation by date

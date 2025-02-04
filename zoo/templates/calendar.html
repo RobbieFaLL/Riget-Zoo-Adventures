@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Opening Times Calendar</h1>
+
+    <!-- Month Navigation -->
+    <div class="calendar-navigation text-center mb-3">
+        <a href="{% url 'calendar_month' year=prev_year month=prev_month %}" class="btn btn-secondary">&laquo; Previous</a>
+        <span class="calendar-month">{{ month_name }} {{ year }}</span>
+        <a href="{% url 'calendar_month' year=next_year month=next_month %}" class="btn btn-secondary">Next &raquo;</a>
+    </div>    
+
+    <!-- Opening Hours Key -->
+    <div id="calendar-key">
+        <h3>Opening Hours Key</h3>
+        <ul class="list-unstyled">
+            <li><span class="color-box" style="background: #378006;"></span> 10:00 - 18:00 (Standard)</li>
+            <li><span class="color-box" style="background: #FFA500;"></span> 10:00 - 17:00 (Short Day)</li>
+            <li><span class="color-box" style="background: #0073e6;"></span> 09:00 - 17:00 (Traditional)</li>
+            <li><span class="color-box" style="background: #8A2BE2;"></span> 09:00 - 18:00 (Extended)</li>
+            <li><span class="color-box" style="background: #DC143C;"></span> 09:00 - 21:00 (Late)</li>
+            <li><span class="color-box" style="background: #FF0000;"></span> Closed</li>
+        </ul>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="calendar-container">
+        <table class="calendar table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in calendar_data %}
+                <tr>
+                    {% for day in week %}
+                    <td class="{% if day.color %}day-{{ day.color }}{% endif %}" 
+                        data-date="{{ day.date|date:'Y-m-d' }}">
+                        <span class="date-number">{{ day.date|date:"j" }}</span>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Include external JavaScript -->
+<script src="{% static 'cal.js' %}"></script>
+
+{% endblock %}
