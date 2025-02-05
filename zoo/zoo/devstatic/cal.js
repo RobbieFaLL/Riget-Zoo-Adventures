@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then(data => {
                         modalTitle.innerText = `${new Date(date).toLocaleDateString("en-GB", { day: 'numeric', month: 'long' })} Opening Times`;
 
-                        if (data.status === "open") {
+                        if (data.opening_time && data.closing_time) {
                             modalContent.innerHTML = `
                                 <p><strong>Opening Hours:</strong> ${data.opening_time} - ${data.closing_time}</p>
                                 <a href="/booking/" class="book-btn">Book Now</a>
                             `;
-                        } else if (data.status === "closed") {
+                        } else if (data.reason) { 
                             modalContent.innerHTML = `<p><strong>Closed:</strong> ${data.reason}</p>`;
                         } else {
                             modalContent.innerHTML = `<p><strong>No data available for this day.</strong></p>`;

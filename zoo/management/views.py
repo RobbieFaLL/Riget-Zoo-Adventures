@@ -218,6 +218,7 @@ def opening_hours(request):
 
     return JsonResponse(business_hours, safe=False)
 
+from datetime import datetime
 from django.http import JsonResponse
 from .models import OpeningHours, ClosedDays
 
@@ -225,22 +226,32 @@ def get_day_details(request):
     date_str = request.GET.get('date')
     try:
         day = datetime.strptime(date_str, '%Y-%m-%d').date()
+
+        # Check if the date is in ClosedDays first
+        closed_entry = ClosedDays.objects.filter(date=day).first()
+        if closed_entry:
+            return JsonResponse({
+                'date': day.strftime('%Y-%m-%d'),
+                'status': 'closed',
+                'reason': closed_entry.reason if closed_entry.reason else 'Closed'
+            })
+
+        # If not closed, check for opening hours
         opening_entry = OpeningHours.objects.filter(date=day).first()
-
         if opening_entry:
-            opening_time = opening_entry.opening_time
-            closing_time = opening_entry.closing_time
-            color = opening_entry.get_color()
-        else:
-            opening_time = None
-            closing_time = None
-            color = 'grey'  # Or default color if no opening entry exists
+            return JsonResponse({
+                'date': day.strftime('%Y-%m-%d'),
+                'status': 'open',
+                'opening_time': opening_entry.opening_time,
+                'closing_time': opening_entry.closing_time,
+                'color': opening_entry.get_color(),
+            })
 
+        # If no data exists, return status "no_data"
         return JsonResponse({
-            'date': day,
-            'opening_time': opening_time,
-            'closing_time': closing_time,
-            'color': color,
+            'date': day.strftime('%Y-%m-%d'),
+            'status': 'no_data',
+            'message': 'No data available for this day'
         })
 
     except ValueError:

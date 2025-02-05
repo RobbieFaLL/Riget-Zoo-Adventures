@@ -44,7 +44,7 @@ class OpeningHoursAdmin(admin.ModelAdmin):
     def bulk_set_hours_view(self, request):
         """Handles bulk setting of opening hours inside Django Admin"""
         today = date.today()  # Define today here
-        available_dates = [today + timedelta(days=i) for i in range(30)]  # Next 30 days
+        available_dates = [today + timedelta(days=i) for i in range(365)]  # Next 30 days
 
         if request.method == 'POST':
             form = BulkOpeningHoursForm(request.POST)
