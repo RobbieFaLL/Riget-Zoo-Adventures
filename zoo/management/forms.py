@@ -114,3 +114,42 @@ class CustomSignupForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+from django import forms
+from datetime import date, timedelta
+
+class BulkOpeningHoursForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Define 'today' inside the __init__ method to ensure it's available when the form is instantiated
+        today = date.today()
+        available_dates = [today + timedelta(days=i) for i in range(365)]  # Next 30 days
+        
+        # Dynamically create checkboxes for each available date with day of the week
+        for available_date in available_dates:
+            day_of_week = available_date.strftime('%A')  # Get day of the week (e.g., "Monday")
+            date_label = f"{available_date} ({day_of_week})"  # Format label as '2025-02-06 (Monday)'
+            field_name = f"date_{available_date}"
+            self.fields[field_name] = forms.BooleanField(required=False, label=date_label)
+
+        # Predefined opening times (e.g., 9 AM, 10 AM)
+        self.fields['opening_time'] = forms.ChoiceField(
+            choices=[
+                ('09:00', '9:00 AM'),
+                ('10:00', '10:00 AM'),
+            ],
+            required=True,
+            label="Select Opening Time"
+        )
+        
+        # Predefined closing times (e.g., 5 PM, 6 PM, 9 PM)
+        self.fields['closing_time'] = forms.ChoiceField(
+            choices=[
+                ('17:00', '5:00 PM'),
+                ('18:00', '6:00 PM'),
+                ('21:00', '9:00 PM'),
+            ],
+            required=True,
+            label="Select Closing Time"
+        )

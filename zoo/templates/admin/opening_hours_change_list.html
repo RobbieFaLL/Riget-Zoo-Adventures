@@ -1,0 +1,8 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+    <p>
+        <a href="{% url 'admin:bulk_set_hours' %}" class="button">Bulk Set Opening Hours</a>
+    </p>
+    {{ block.super }}  {# Keeps the default admin list below #}
+{% endblock %}

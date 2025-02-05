@@ -19,19 +19,64 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('phone_number',)}),  
     )
 
-# Opening Hours Admin
+from datetime import date, timedelta
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from .forms import BulkOpeningHoursForm
+from .models import OpeningHours
+from django.urls import path
+from django.contrib import admin
+from datetime import datetime
+
 @admin.register(OpeningHours)
+
 class OpeningHoursAdmin(admin.ModelAdmin):
-    list_display = ('date', 'opening_time', 'closing_time', 'get_color_display')
-    search_fields = ('date',)
-    ordering = ('date',)
-    list_filter = ('opening_time', 'closing_time')
+    list_display = ('date', 'opening_time', 'closing_time')
+    change_list_template = "admin/opening_hours_change_list.html"
 
-    def get_color_display(self, obj):
-        """Display the color associated with the opening hours"""
-        return obj.get_color()
-    get_color_display.short_description = "Opening Hours Color"
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('bulk-set-hours/', self.admin_site.admin_view(self.bulk_set_hours_view), name='bulk_set_hours'),
+        ]
+        return custom_urls + urls
 
+    def bulk_set_hours_view(self, request):
+        """Handles bulk setting of opening hours inside Django Admin"""
+        today = date.today()  # Define today here
+        available_dates = [today + timedelta(days=i) for i in range(30)]  # Next 30 days
+
+        if request.method == 'POST':
+            form = BulkOpeningHoursForm(request.POST)
+            if form.is_valid():
+                selected_dates = []
+                
+                # Check for which checkboxes are selected
+                for available_date in available_dates:
+                    field_name = f"date_{available_date}"
+                    if field_name in form.cleaned_data and form.cleaned_data[field_name]:
+                        selected_dates.append(available_date)
+
+                # Get the opening_time and closing_time from the form (selected via tickboxes)
+                opening_time = form.cleaned_data['opening_time']
+                closing_time = form.cleaned_data['closing_time']
+
+                # Use bulk_create_or_update to save the dates
+                OpeningHours.bulk_create_or_update(selected_dates, opening_time, closing_time)
+
+                self.message_user(request, "Opening hours updated successfully.")
+                return HttpResponseRedirect("../")  # Redirect back to admin
+
+        else:
+            form = BulkOpeningHoursForm()
+
+        context = {
+            'form': form,
+            'opts': self.model._meta,  # Needed for admin templates
+        }
+        return render(request, 'admin/bulk_opening_hours.html', context)
+
+    
 # Closed Days Admin
 @admin.register(ClosedDays)
 class ClosedDaysAdmin(admin.ModelAdmin):

@@ -127,8 +127,6 @@ def check_user_exists_password(request):
 
     return JsonResponse({"valid": True} if user else {"valid": False, "error_type": "invalid_password"})
 
-# Generate Calendar Data
-
 def generate_calendar(year, month):
     """Generate a structured calendar list for the given month."""
     cal = calendar.Calendar()
@@ -143,12 +141,13 @@ def generate_calendar(year, month):
             week.append({'date': day, 'opening_time': None, 'closing_time': None, 'color': 'grey'})
         else:
             opening_entry = OpeningHours.objects.filter(date=day).first()
+            # Get the color using get_color method, or fallback to 'red' if no entry exists
             color = opening_entry.get_color() if opening_entry else 'red'
             week.append({
                 'date': day,
-                'opening_time': opening_entry.opening_time.strftime('%H:%M') if opening_entry else None,
-                'closing_time': opening_entry.closing_time.strftime('%H:%M') if opening_entry else None,
-                'color': color,
+                'opening_time': opening_entry.opening_time if opening_entry else None,
+                'closing_time': opening_entry.closing_time if opening_entry else None,
+                'color': color,  # Set the color based on get_color()
             })
 
         if len(week) == 7:
@@ -223,30 +222,26 @@ from django.http import JsonResponse
 from .models import OpeningHours, ClosedDays
 
 def get_day_details(request):
-    """ Returns JSON data with opening hours or closure reason when a date is clicked """
     date_str = request.GET.get('date')
-    
     try:
-        opening_entry = OpeningHours.objects.get(date=date_str)
-        response = {
-            "date": date_str,
-            "status": "open",
-            "opening_time": opening_entry.opening_time.strftime('%H:%M'),
-            "closing_time": opening_entry.closing_time.strftime('%H:%M')
-        }
-    except OpeningHours.DoesNotExist:
-        try:
-            closed_entry = ClosedDays.objects.get(date=date_str)
-            response = {
-                "date": date_str,
-                "status": "closed",
-                "reason": closed_entry.reason or "No specific reason provided"
-            }
-        except ClosedDays.DoesNotExist:
-            response = {
-                "date": date_str,
-                "status": "unknown",
-                "message": "No data available for this day."
-            }
-    
-    return JsonResponse(response)
+        day = datetime.strptime(date_str, '%Y-%m-%d').date()
+        opening_entry = OpeningHours.objects.filter(date=day).first()
+
+        if opening_entry:
+            opening_time = opening_entry.opening_time
+            closing_time = opening_entry.closing_time
+            color = opening_entry.get_color()
+        else:
+            opening_time = None
+            closing_time = None
+            color = 'grey'  # Or default color if no opening entry exists
+
+        return JsonResponse({
+            'date': day,
+            'opening_time': opening_time,
+            'closing_time': closing_time,
+            'color': color,
+        })
+
+    except ValueError:
+        return JsonResponse({'error': 'Invalid date format'}, status=400)

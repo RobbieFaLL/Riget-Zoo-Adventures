@@ -22,12 +22,30 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-# Opening Hours Model
 class OpeningHours(models.Model):
     date = models.DateField(unique=True)
-    opening_time = models.TimeField(null=True, blank=True)
-    closing_time = models.TimeField(null=True, blank=True)
+    
+    # Predefined opening times (e.g., 9 AM, 10 AM)
+    OPENING_TIME_CHOICES = [
+        ('09:00', '9:00 AM'),
+        ('10:00', '10:00 AM'),
+    ]
+    
+    # Predefined closing times (e.g., 5 PM, 6 PM, 9 PM)
+    CLOSING_TIME_CHOICES = [
+        ('17:00', '5:00 PM'),
+        ('18:00', '6:00 PM'),
+        ('21:00', '9:00 PM'),
+    ]
+    
+    # Using CharField with choices instead of TimeField
+    opening_time = models.CharField(max_length=5, choices=OPENING_TIME_CHOICES, null=True, blank=True)
+    closing_time = models.CharField(max_length=5, choices=CLOSING_TIME_CHOICES, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.date}: {self.opening_time} - {self.closing_time}"
+
+    # Define color mapping based on opening and closing times
     COLOR_MAP = {
         ("10:00", "18:00"): "green",
         ("10:00", "17:00"): "orange",
@@ -37,14 +55,25 @@ class OpeningHours(models.Model):
     }
 
     def get_color(self):
-        time_key = (
-            self.opening_time.strftime('%H:%M') if self.opening_time else None,
-            self.closing_time.strftime('%H:%M') if self.closing_time else None
-        )
+        # Directly compare the opening_time and closing_time as strings (no need for strftime)
+        time_key = (self.opening_time, self.closing_time)
         return self.COLOR_MAP.get(time_key, "red" if not self.opening_time else "grey")
 
-    def __str__(self):
-        return f"{self.date}: {self.opening_time} - {self.closing_time or 'Closed'}"
+    @classmethod
+    def bulk_create_or_update(cls, dates, opening_time, closing_time):
+        existing_hours = {oh.date: oh for oh in cls.objects.filter(date__in=dates)}
+        new_entries = []
+
+        for date in dates:
+            if date in existing_hours:
+                existing_hours[date].opening_time = opening_time
+                existing_hours[date].closing_time = closing_time
+                existing_hours[date].save()
+            else:
+                new_entries.append(cls(date=date, opening_time=opening_time, closing_time=closing_time))
+
+        if new_entries:
+            cls.objects.bulk_create(new_entries)
 
 # Closed Days Model
 class ClosedDays(models.Model):

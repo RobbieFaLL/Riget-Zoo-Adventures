@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+{% load static %}
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <h3>Select Dates for Bulk Update:</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}  <!-- This renders checkboxes dynamically with the date labels -->
+                </div>
+            {% endfor %}
+        </div>
+
+        <h3>Select Opening Time:</h3>
+        {{ form.opening_time }} <!-- This will render predefined opening time options -->
+
+        <h3>Select Closing Time:</h3>
+        {{ form.closing_time }} <!-- This will render predefined closing time options -->
+
+        <button type="submit">Update Opening Hours</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr('.flatpickr', {
+                mode: "multiple",  // Enable multi-date selection (if using Flatpickr for date picking)
+                dateFormat: "Y-m-d",  // Ensure the correct format for dates
+                disableMobile: true  // Optional: Disable mobile version of the datepicker
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+{% endblock %}
