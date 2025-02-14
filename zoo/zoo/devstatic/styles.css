@@ -285,10 +285,11 @@ footer {
   background-color: #333;
   color: #fff;
   padding: 10px 0;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+  position:fixed;
+  bottom:0;
+  padding-bottom: 10px;
   margin-top: 25px;
+  width: 100%; /* Ensure footer spans full width */
 }
 
 footer p {
@@ -449,6 +450,7 @@ footer img {
 
 main{
   padding-top: 25px;
+  padding-bottom: 100px;
 }
 
 /* Default Image Styling */
