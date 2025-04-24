@@ -1,58 +1,83 @@
-# Riget Zoo Adventures
+# 🧺 Riget Zoo Adventures
 
-## Overview
-**Riget Zoo Adventures** is a Django-based web application that provides visitors with essential zoo information, including:
-- Animal exhibits
-- Upcoming events
-- Conservation efforts
-- Online booking system for visits and activities
+## 🌍 Overview
+**Riget Zoo Adventures** is a Django-based web application designed to enhance the visitor experience at a zoo. It provides key features including:
 
-## Directory Structure
+- 🐾 Animal exhibits
+- 🗕️ Upcoming events
+- 🌱 Conservation efforts
+- 🧾 Online booking system for visits and activities
+
+---
+
+## 📁 Directory Structure
+```plaintext
+riget-zoo-adventures/
+│
+├── zoo/                              # Main Django application
+├── .gitignore                        # Git ignore rules
+├── readme.md                         # Project overview and documentation
+├── Task1_Test_Strategy_Template.doc  # Test strategy template
+├── Task2_Test_Log_Template.doc       # Test log template
+└── W76777-T-Level-Documents/         # Additional project documentation
 ```
-Riget Zoo Adventures/
-│── zoo/                     # Main Django application directory
-│── .gitignore               # Git ignore file
-│── readme.md                # Project documentation
-│── Task1_Test_Strategy_Template.doc  # Test strategy document
-│── Task2_Test_Log_Template.doc       # Test log document
-│── W76777-T-Level-Documents/         # Additional documentation files
-```
 
-### Key Components
-- **`zoo/`** - Contains Django applications and configurations.
-- **`.gitignore`** - Specifies files and directories to be ignored by Git.
-- **`readme.md`** - Project documentation.
-- **Testing Documents** - Includes testing strategy and logging templates.
+### 🔑 Key Components
+- **`zoo/`** – Django app logic and configuration.
+- **`.gitignore`** – Files and folders to be excluded from version control.
+- **`readme.md`** – Main documentation file.
+- **Test Docs** – Templates for test strategy and logs to support project testing.
 
-## Installation
-Follow these steps to set up the project:
+---
+
+## ⚙️ Installation Guide
+
+Follow these steps to set up and run the project locally:
 
 1. **Clone the repository**  
-   ```sh
+   ```bash
    git clone https://github.com/yourusername/riget-zoo-adventures.git
    ```
-2. **Navigate into the project directory**  
-   ```sh
+
+2. **Navigate into the project folder**  
+   ```bash
    cd riget-zoo-adventures
    ```
+
 3. **Create and activate a virtual environment**  
-   ```sh
+   ```bash
    python -m venv env
-   source env/bin/activate  # On Windows use `env\Scripts\activate`
+   source env/bin/activate        # On Windows: env\Scripts\activate
    ```
+
 4. **Install dependencies**  
-   ```sh
+   ```bash
    pip install -r zoo/requirements.txt
    ```
+
 5. **Apply database migrations**  
-   ```sh
+   ```bash
    python zoo/manage.py migrate
    ```
-6. **Start the development server**  
-   ```sh
+
+6. **Run the development server**  
+   ```bash
    python zoo/manage.py runserver
    ```
 
-## Usage
-- Open **[`http://127.0.0.1:8000/`](http://127.
+---
+
+## 🚀 Usage
+
+Once the server is running, open your browser and visit:
+
+👉 **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
+
+---
+
+## 📚 Note
+
+This project was created for **educational purposes only**, as part of my personal development ahead of my exams.
+
+---
 
