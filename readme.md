@@ -36,7 +36,7 @@ Follow these steps to set up and run the project locally:
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/yourusername/riget-zoo-adventures.git
+   git clone https://github.com/RobbieFall/riget-zoo-adventures.git
    ```
 
 2. **Navigate into the project folder**  
